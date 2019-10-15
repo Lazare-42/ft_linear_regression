@@ -18,11 +18,11 @@ def estimatePrice(mileage):
 def getSquaredDeviationSum(data):
     result = float(0.0)
     for n in data:
-        result += (n[1] - estimatePrice(n[0])) * (n[1] - estimatePrice(n[0]))
+        result += (estimatePrice(n[0]) - n[1]) * n[0]
     return (result / len(data))
 
-def getSecondDegreeDerivative(value):
-    return
+#def getResult(data):
+    
 
 if __name__ == '__main__':
     data = list(csv.reader(open("./data.csv")))
