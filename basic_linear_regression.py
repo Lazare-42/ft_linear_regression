@@ -30,29 +30,30 @@ def linearRegression(data, regressionValues):
         regressionValues.theta_one  = regressionValues.theta_one  - regressionValues.learningRate * derivativeThetaOne(data, regressionValues)
 
 def main():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--iter", type=float, default=2000)
-    parser.add_argument("--thetaZero", type=float, default=0.0)
-    parser.add_argument("--thetaOne", type=float, default=0.0)
-    parser.add_argument("--learningRate", type=float, default=0.0)
-    parser.add_argument("--data", default="./data.csv")
-    parser.parse_args()
+
+    #parser = argparse.ArgumentParser()
+    #parser.add_argument("--iter", type=float, default=2000)
+    #parser.add_argument("--thetaZero", type=float, default=0.0)
+    #parser.add_argument("--thetaOne", type=float, default=0.0)
+    #parser.add_argument("--learningRate", type=float, default=0.0)
+    #parser.add_argument("--data", default="./data_realEstate_paris.csv")
+    #parser.parse_args()
+
     theta_zero          = float(0.0)
     theta_one           = float(0.0)
-    learningRate        = float(0.0)
-    iterations          = 2000
+    learningRate        = float(0.01)
+    iterations          = 20000
 
-    print (theta_zero, theta_zero, learningRate, iterations)
-    #data                = getData()
-    #dataSetRange        = getDataSetRange(data)
-    #data                = normalizeData(data, dataSetRange)
-    #regVal              = regressionValues(theta_zero, theta_one, learningRate, iterations)
+    data                = getData()
+    dataSetRange        = getDataSetRange(data)
+    data                = normalizeData(data, dataSetRange)
+    regVal              = regressionValues(theta_zero, theta_one, learningRate, iterations)
 
-    #linearRegression(data, regVal)
-    #showOriginalDataPoints(denormalizeData(data, dataSetRange))
-    #print(denormalizeOneDataPoint(regVal.theta_zero, dataSetRange), denormalizeOneDataPoint(regVal.theta_one, dataSetRange))
-    #abline(denormalizeOneDataPoint(regVal.theta_one, dataSetRange), denormalizeOneDataPoint(regVal.theta_zero, dataSetRange))
-    #show()
+    linearRegression(data, regVal)
+    showOriginalDataPoints(denormalizeData(data, dataSetRange))
+    print(denormalizeOneDataPoint(regVal.theta_zero, dataSetRange), denormalizeOneDataPoint(regVal.theta_one, dataSetRange))
+    abline(denormalizeOneDataPoint(regVal.theta_one, dataSetRange), denormalizeOneDataPoint(regVal.theta_zero, dataSetRange))
+    show()
 
 if __name__ == '__main__':
     main()
