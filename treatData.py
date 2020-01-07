@@ -39,5 +39,5 @@ def normalizeData(data, dataSetRange):
 def denormalizeData(data, dataSetRange):
     return [denormalizeOneDataPoint(t, dataSetRange) for t in data]
 
-def getData():
-    return convertStringToFLoatTuple(plot(list(csv.reader(open("./data.csv")))))
+def getData(fileName):
+    return convertStringToFLoatTuple(plot(list(csv.reader(open(fileName)))))
