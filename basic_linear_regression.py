@@ -9,26 +9,26 @@ class regressionValues:
         self.learningRate   = learningRate 
         self.iterations     = iterations 
 
-def estimatePrice(mileage, regressionValues):
+def estimatePrice(regressionValues, mileage):
     return regressionValues.theta_zero + regressionValues.theta_one * mileage
 
 def derivativeThetaZero(data, regressionValues):
     result = float(0.0)
     for n in data:
-        result += estimatePrice(n[1], regressionValues) - n[1]
-    return (result / len(data))
+        result += estimatePrice(regressionValues, n[0]) - n[1]
+    return result / len(data)
 
 def derivativeThetaOne(data, regressionValues):
     result = float(0.0)
     for n in data:
-        result += (estimatePrice(n[1], regressionValues) - n[1]) * n[1]
-    return (result / len(data))
+        result += (estimatePrice(regressionValues, n[0]) - n[1]) * n[0]
+    return result / len(data)
 
 def linearRegression(data, regressionValues):
     for iteration in range(regressionValues.iterations):
         regressionValues.theta_zero = regressionValues.theta_zero - regressionValues.learningRate * derivativeThetaZero(data, regressionValues)
         regressionValues.theta_one  = regressionValues.theta_one  - regressionValues.learningRate * derivativeThetaOne(data, regressionValues)
-    return (regressionValues)
+    return regressionValues
 
 def main():
 
@@ -49,11 +49,11 @@ def main():
     dataSetRange        = getDataSetRange(data)
     data                = normalizeData(data, dataSetRange)
     regVal              = regressionValues(theta_zero, theta_one, learningRate, iterations)
-
+    
     regVal = linearRegression(data, regVal)
-    thetas = denormalizeOneDataPoint((regVal.theta_one, regVal.theta_zero), dataSetRange)
-
-    showOriginalDataPoints(denormalizeData(data, dataSetRange))
+    thetas = (regVal.theta_zero, regVal.theta_one)
+    
+    showOriginalDataPoints((data))
     abline(thetas[1], thetas[0])
     show()
 
