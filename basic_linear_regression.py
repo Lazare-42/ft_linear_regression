@@ -23,12 +23,14 @@ def userLoop(dataFields, data, regVal):
 
     valueToEstimateY = denormalizeY((normalizeX(valueToEstimateX, dataSetRange) * thetas[1] + thetas[0]), dataSetRange)
     print("For " + str(valueToEstimateX) + dataFields[0] + ", the estimated " + dataFields[1] + " is " + str(valueToEstimateY))
-    showEstimatedPoint((normalizeX(valueToEstimateX, dataSetRange), normalizeY(valueToEstimateY, dataSetRange)))
-    showOriginalDataPoints((data))
-    abline(thetas[1], thetas[0])
+    showEstimatedPoint((valueToEstimateX, valueToEstimateY))
+    showOriginalDataPoints(denormalizeData(data, dataSetRange))
+    abline(thetas[1], thetas[0], dataSetRange)
     show()
-    data.append((valueToEstimateX, valueToEstimateY))
-    userLoop(dataFields, data, regVal)
+
+
+    #data.append((valueToEstimateX, valueToEstimateY))
+    #userLoop(dataFields, data, regVal)
 
 
 def main():
