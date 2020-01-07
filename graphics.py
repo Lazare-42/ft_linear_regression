@@ -13,12 +13,15 @@ def showOriginalDataPoints(data):
     y_val = [x[1] for x in data]
     plt.scatter(x_val, y_val) 
 
+def showEstimatedPoint(point):
+    plt.plot(point[0], point[1], marker='o', markersize=5, color="red")
+
 def plot(data):
     plt.xlabel(data[0][0])
     plt.ylabel(data[0][1])
-    data.pop(0)
     return (data)
 
 def show():
-    plt.show()
+    plt.draw()
+    plt.pause(0.1)
 

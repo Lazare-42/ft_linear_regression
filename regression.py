@@ -24,5 +24,5 @@ def linearRegression(data, regressionValues):
     for iteration in range(regressionValues.iterations):
         regressionValues.theta_zero = regressionValues.theta_zero - regressionValues.learningRate * derivativeThetaZero(data, regressionValues)
         regressionValues.theta_one  = regressionValues.theta_one  - regressionValues.learningRate * derivativeThetaOne(data, regressionValues)
-    return regressionValues
+    return (regressionValues.theta_zero, regressionValues.theta_one)
 
