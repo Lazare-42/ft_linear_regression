@@ -32,16 +32,14 @@ def linearRegression(data, regressionValues):
     for iteration in range(regressionValues.iterations):
         tmp_theta_zero = regressionValues.theta_zero - regressionValues.learningRate * derivativeThetaZero(data, regressionValues)
         tmp_theta_one  = regressionValues.theta_one  - regressionValues.learningRate * derivativeThetaOne(data, regressionValues)
-    regressionValues.theta_zero = tmp_theta_zero
-    regressionValues.theta_one  = tmp_theta_one 
+        regressionValues.theta_zero = tmp_theta_zero
+        regressionValues.theta_one  = tmp_theta_one 
 
-    valueToEstimateY = denormalizeY((normalizeX(45000, dataSetRange) * regressionValues.theta_one + regressionValues.theta_zero), dataSetRange)
-    print(valueToEstimateY)
-    return (denormalizeY(regressionValues.theta_zero, dataSetRange), denormalizeX(regressionValues.theta_one, dataSetRange))
+    return (regressionValues.theta_zero, regressionValues.theta_one)
 
 def parse():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--iter", type=int, default=200000)
+    parser.add_argument("--iter", type=int, default=20000)
     parser.add_argument("--learningRate", type=float, default=0.01)
     parser.add_argument("--data", default="./data.csv")
     args = parser.parse_args()

@@ -11,14 +11,15 @@ def parse():
 
 def userLoop(dataFields, data, theta_zero, theta_one):
 
+    dataSetRange            = getDataSetRange(data)
     valueToEstimateX    = float(input("Input a " + dataFields[0] +
     ", and the program will estimate its corresponding " + dataFields[1] + " : "))
-    valueToEstimateY = valueToEstimateX * theta_one + theta_zero
+    valueToEstimateY = denormalizeY((normalizeX(valueToEstimateX , dataSetRange) * theta_one + theta_zero), dataSetRange)
     print("For " + str(valueToEstimateX) + dataFields[0] + ", the estimated " + dataFields[1] + " is " + str(valueToEstimateY))
 
     showEstimatedPoint((valueToEstimateX, valueToEstimateY))
     showOriginalDataPoints(data)
-    abline(theta_one, theta_zero)
+    abline(theta_one, theta_zero, dataSetRange)
     show()
     userLoop(dataFields, data, theta_zero, theta_one)
 
