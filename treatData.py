@@ -1,6 +1,5 @@
 import csv
 from operator import itemgetter
-from graphics import plot
 
 class dataSetRange:
     def __init__(self, max_X, min_X, max_Y, min_Y):
@@ -48,7 +47,7 @@ def denormalizeData(data, dataSetRange):
     return [denormalizeOneDataPoint(t, dataSetRange) for t in data]
 
 def getData(fileName):
-    data = plot(list(csv.reader(open(fileName))))
+    data = list(csv.reader(open(fileName)))
     dataFields = data[0]
     data.pop(0)
     return (dataFields, convertStringToFLoatTuple(data))
