@@ -1,20 +1,11 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-def normalizeX(point_X, dataSetRange):
-    point_X = (point_X - dataSetRange.min_X) / (dataSetRange.max_X - dataSetRange.min_X)
-    return (point_X)
-
-def denormalizeY(point_Y, dataSetRange):
-    point_Y = (point_Y * (dataSetRange.max_Y - dataSetRange.min_Y)) + dataSetRange.min_Y
-    return (point_Y)
-
-def abline(normalizedSlope, normalizedIntercept, dataSetRange):
-    """Plot a line from normalizedSlope and normalizedIntercept"""
+def abline(slope, intercept):
+    """Plot a line from slope and intercept"""
     axes = plt.gca()
     x_vals = np.array(axes.get_xlim())
-    normalizedX = [normalizeX(x, dataSetRange) for x in x_vals]
-    y_vals = [denormalizeY(normalizedIntercept + normalizedSlope * x, dataSetRange) for x in normalizedX]
+    y_vals = intercept + slope * x_vals
     plt.plot(x_vals, y_vals, '--')
 
 def showOriginalDataPoints(data):
@@ -31,6 +22,6 @@ def plot(data):
     return (data)
 
 def show():
-    plt.title("ft_linear_regression")
-    plt.show()
+    plt.draw()
+    plt.pause(0.1)
 
